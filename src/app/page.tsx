@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ActiveScheduleItemIndicator from '~/components/ActiveScheduleItemIndicator'
+import BreakCard from '~/components/BreakCard'
 import LessonCard from '~/components/LessonCard'
 
 export default function Home() {
@@ -20,10 +21,9 @@ export default function Home() {
                 </div>
                 <div className="flex items-center">
                     <ActiveScheduleItemIndicator active/>
-                    <LessonCard
-                        lessonName="15 минут"
-                        lessonCaption="8:30-9:15"
-                        className="border-green-400 border-2 text-green-400"
+                    <BreakCard
+                        breakDuration="15 минут"
+                        breakCaption="8:30-9:15"
                     />
                 </div>
             </section>
