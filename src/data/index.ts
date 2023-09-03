@@ -3,14 +3,14 @@ export interface ScheduleItem {
     end: string;
 }
 
-interface Lesson extends ScheduleItem {
+export interface Lesson extends ScheduleItem {
     code: SubjectCode
     lessonName: string;
     // teacher: string;
     // room: string;
 }
 
-interface Break extends ScheduleItem {}
+export interface Break extends ScheduleItem {}
 
 interface SchoolDay {
     dayOfTheWeek: number;

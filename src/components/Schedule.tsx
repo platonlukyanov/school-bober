@@ -4,12 +4,14 @@ import ActiveScheduleItemIndicator from "./ActiveScheduleItemIndicator";
 import LessonCard from "./LessonCard";
 import { SubjectCode, schedule } from "~/data";
 import getNowTime from "~/utils/getNowTime";
-import getRussianDayOfTheWeek from "~/utils/getRussianDayOfTheWeek";
 import BreakCard from "./BreakCard";
 import getMinutesBetweenTimestrings from "~/utils/getMinutesBetweenTimestrings";
-import isLater, { isEarlier } from "~/utils/isLater";
-import { useAtom, useAtomValue } from "jotai";
-import selectedDayOfWeekAtom from "~/atoms/selectedDayOfWeek";
+import { isEarlier } from "~/utils/isLater";
+import { useAtomValue } from "jotai";
+import selectedDayOfWeekAtom, { currentDatetimeAtom } from "~/atoms/selectedDayOfWeek";
+import getLessonCompletionPercentage from "~/utils/getLessonCompletionPercentage";
+import getBreakCompletionPercentage from "~/utils/getBreakCompletionPercentage";
+import React from "react";
 
 const subjectToTWClass = new Map<SubjectCode, string>();
 subjectToTWClass.set('algebra', 'bg-blue-200')
@@ -37,7 +39,7 @@ subjectToTWClass.set('astronomy', 'bg-blue-200')
 const sunday = -1;
 
 export default function Schedule() {
-    const nowDatetime = changeTimeZone(getNowTime())
+    const nowDatetime = useAtomValue(currentDatetimeAtom)
     const selectedDayOfWeek = useAtomValue(selectedDayOfWeekAtom)
     const numericDayOfWeek = selectedDayOfWeek - 1
     const todaysSchedule = schedule[numericDayOfWeek]
@@ -69,8 +71,11 @@ export default function Schedule() {
             const isCurrentLessonGone = isEarlier(lesson.end, currentTime)
             const isPreviousBreakGone = index > 0 && isEarlier(todaysSchedule.breaks[index - 1].end, currentTime)
             const isCurrentBreakGone = Boolean(nextBreak && isEarlier(nextBreak.end, currentTime))
+            
+            const lessonCompletionPercentage = getLessonCompletionPercentage(lesson, currentTime)
+            const breakCompletionPercentage = nextBreak && getBreakCompletionPercentage(nextBreak, currentTime)
 
-            return <> <div className="flex items-center w-full" key={lesson.code}>
+            return <React.Fragment key={lesson.code + 'block'}> <div className="flex items-center w-full" key={lesson.code}>
                 <ActiveScheduleItemIndicator
                     active={lesson.start < currentTime && lesson.end > currentTime}
                 />
@@ -80,6 +85,7 @@ export default function Schedule() {
                     className={subjectToTWClass.get(lesson.code) ?? 'bg-gray-200'}
                     gone={isSelectedDayToday && isCurrentLessonGone}
                     needsAttention={isSelectedDayToday && (isPreviousLessonGone || !isCurrentLessonGone)}
+                    progress={lessonCompletionPercentage ?? 0}
                 />
             </div>
             {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
@@ -91,9 +97,10 @@ export default function Schedule() {
                     breakCaption={`${nextBreak.start}-${nextBreak.end}`}
                     gone={isSelectedDayToday && isCurrentBreakGone}
                     needsAttention={isSelectedDayToday && (isPreviousBreakGone || !isCurrentBreakGone)}
+                    progress={breakCompletionPercentage ?? 0}
                 />
             </div>}
-            </>
+            </React.Fragment>
         })}
     </section>
 }

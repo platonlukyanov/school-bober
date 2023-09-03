@@ -7,9 +7,11 @@ interface LessonCardProps {
     className?: string
     gone?: boolean,
     needsAttention?: boolean
+    progress?: number
+    progressClassname?: string
 }
 
-function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention }: LessonCardProps) {
+function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention, progress, progressClassname }: LessonCardProps) {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -27,9 +29,11 @@ function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention
             ref={ref}
             className={`rounded-2xl w-full flex justify-center
                         items-center p-6 text-center
+                        relative
                         ${className}
                         ${gone ? 'bg-slate-200 text-slate-500 border-none' : ''}`}>
-            <div>
+            <div className={`absolute h-full z-0 bg-slate-600 rounded-l-2xl opacity-10 left-0 ${progressClassname}`} style={{ width: `${progress}%` }} />
+            <div className="relative">
                 <h3 className="font-bold text-xl mb-1">{lessonName}</h3>
                 <p className="text-base opacity-50">{lessonCaption}</p>
             </div>
