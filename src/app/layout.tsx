@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
 import Head from 'next/head'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -18,9 +19,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ru">
-            <Head>
-                <script defer data-domain="xn--90aam8am.fun" src="https://plausible.io/js/script.js"></script>
-            </Head>
+            <head>
+                <Script
+                    defer
+                    data-domain="xn--90aam8am.fun"
+                    src="https://plausible.io/js/script.js"
+                />
+            </head>
             <body className={montserrat.className}>{children}</body>
         </html>
     )
