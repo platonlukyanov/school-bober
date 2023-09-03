@@ -21,8 +21,8 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <head>
-                <link rel="manifest" href="assets/manifest.json" />
-                <link rel="apple-touch-icon" href="assets/bober.png"></link>
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="apple-touch-icon" href="/bober.png"></link>
                 <meta name="theme-color" content="#fff" />
                 <Script
                     defer
