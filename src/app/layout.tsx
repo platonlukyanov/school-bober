@@ -35,7 +35,6 @@ export default function RootLayout({
                 <JotaiProvider>
                     {children}
                 </JotaiProvider>
-                <Link href="https://www.flaticon.com/ru/free-icons/" title="бобр иконки" className="text-sm text-slate-300 absolute bottom-0">Бобр иконки от Freepik - Flaticon</Link>
             </body>
         </html>
     )
