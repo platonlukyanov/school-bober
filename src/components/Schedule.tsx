@@ -6,6 +6,7 @@ import getNowTime from "~/utils/getNowTime";
 import getRussianDayOfTheWeek from "~/utils/getRussianDayOfTheWeek";
 import BreakCard from "./BreakCard";
 import getMinutesBetweenTimestrings from "~/utils/getMinutesBetweenTimestrings";
+import isLater, { isEarlier } from "~/utils/isLater";
 
 const subjectToTWClass = new Map<SubjectCode, string>();
 subjectToTWClass.set('algebra', 'bg-blue-200')
@@ -34,7 +35,7 @@ const sunday = -1;
 
 export default function Schedule() {
     const nowDatetime = changeTimeZone(getNowTime())
-    const numericDayOfWeek = 5 - 1
+    const numericDayOfWeek = nowDatetime.getDay() - 1
     const todaysSchedule = schedule[numericDayOfWeek]
 
     if (numericDayOfWeek == sunday) {
@@ -53,12 +54,16 @@ export default function Schedule() {
 
     return <section className="mt-6 flex flex-col gap-6">
         {todaysSchedule.lessons.map((lesson, index) => {
-
             let nextBreak = null;
 
             if (index < todaysSchedule.lessons.length - 1) {
                 nextBreak = todaysSchedule.breaks[index]
             }
+
+            const isPreviousLessonGone = index > 0 && isEarlier(todaysSchedule.lessons[index - 1].end, currentTime)
+            const isCurrentLessonGone = isEarlier(lesson.end, currentTime)
+            const isPreviousBreakGone = index > 0 && isEarlier(todaysSchedule.breaks[index - 1].end, currentTime)
+            const isCurrentBreakGone = Boolean(nextBreak && isEarlier(nextBreak.end, currentTime))
 
             return <> <div className="flex items-center w-full" key={lesson.code}>
                 <ActiveScheduleItemIndicator
@@ -68,6 +73,8 @@ export default function Schedule() {
                     lessonName={lesson.lessonName}
                     lessonCaption={`${lesson.start}-${lesson.end}`}
                     className={subjectToTWClass.get(lesson.code) ?? 'bg-gray-200'}
+                    gone={isCurrentLessonGone}
+                    needsAttention={isPreviousLessonGone || !isCurrentLessonGone}
                 />
             </div>
             {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
@@ -77,6 +84,8 @@ export default function Schedule() {
                 <BreakCard
                     breakDuration={getMinutesBetweenTimestrings(nextBreak.start, nextBreak.end) + ' минут'}
                     breakCaption={`${nextBreak.start}-${nextBreak.end}`}
+                    gone={isCurrentBreakGone}
+                    needsAttention={isPreviousBreakGone || !isCurrentBreakGone}
                 />
             </div>}
             </>

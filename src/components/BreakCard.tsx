@@ -10,6 +10,7 @@ function BreakCard(props: BreakCardProps) {
         lessonName={props.breakDuration}
         lessonCaption={props.breakCaption}
         className="border-green-400 border-2 text-green-400"
+        {...props}
     />
 }
 

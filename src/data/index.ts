@@ -118,10 +118,6 @@ const tradionalLessonsStartsAndEnds: ScheduleItem[] = [
         end: "14:20",
     },
     {
-        start: "13:35",
-        end: "14:20",
-    },
-    {
         start: "14:30",
         end: "15:15",
     },

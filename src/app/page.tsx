@@ -19,20 +19,6 @@ export default function Home() {
                 <Image src="/bober.svg" alt="B" width={35} height={35}/>
             </nav>
             <Schedule />
-            {/* <div className="flex items-center">
-                    <ActiveScheduleItemIndicator />
-                    <LessonCard
-                        lessonName="История ⌛️"
-                        lessonCaption="8:30-9:15"
-                        className="bg-amber-200"
-                    />
-                </div>
-                <div className="flex items-center">
-                    <ActiveScheduleItemIndicator active/>
-                    <BreakCard
-                        breakDuration="15 минут"
-                        breakCaption="8:30-9:15"
-                    /> */}
         </main>
     )
 }
