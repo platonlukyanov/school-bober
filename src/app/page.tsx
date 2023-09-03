@@ -5,12 +5,14 @@ import SelectDayOfWeek from '~/components/SelectDayOfWeek'
 
 export default function Home() {
     return (
-        <main className="min-h-screen p-6">
-            <nav className="flex justify-between">
-                <SelectDayOfWeek />
-                <Image src="/bober.svg" alt="B" width={35} height={35}/>
-            </nav>
-            <Schedule />
+        <main className="min-h-screen p-6 flex justify-center">
+            <div className="w-full max-w-md">
+                <nav className="flex justify-between">
+                    <SelectDayOfWeek />
+                    <Image src="/bober.svg" alt="B" width={35} height={35}/>
+                </nav>
+                <Schedule />
+            </div>
         </main>
     )
 }
