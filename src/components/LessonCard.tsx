@@ -13,7 +13,7 @@ function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (!ref || !ref.current) return;
+        if (!ref || !ref.current || !needsAttention) return;
         const margin = 100;
         ref.current.scrollIntoView({
             behavior: 'smooth',

@@ -4,6 +4,7 @@ import { Inter, Montserrat } from 'next/font/google'
 import Head from 'next/head'
 import Link from 'next/link'
 import Script from 'next/script'
+import JotaiProvider from '~/providers/jotai'
 
 const inter = Inter({ subsets: ['latin'] })
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -31,7 +32,9 @@ export default function RootLayout({
                 />
             </head>
             <body className={montserrat.className}>
-                {children}
+                <JotaiProvider>
+                    {children}
+                </JotaiProvider>
                 <Link href="https://www.flaticon.com/ru/free-icons/" title="бобр иконки" className="text-sm text-slate-300 absolute bottom-0">Бобр иконки от Freepik - Flaticon</Link>
             </body>
         </html>

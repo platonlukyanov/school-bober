@@ -1,3 +1,4 @@
+'use client'
 import changeTimeZone from "~/utils/changeTimeZone";
 import ActiveScheduleItemIndicator from "./ActiveScheduleItemIndicator";
 import LessonCard from "./LessonCard";
@@ -7,6 +8,8 @@ import getRussianDayOfTheWeek from "~/utils/getRussianDayOfTheWeek";
 import BreakCard from "./BreakCard";
 import getMinutesBetweenTimestrings from "~/utils/getMinutesBetweenTimestrings";
 import isLater, { isEarlier } from "~/utils/isLater";
+import { useAtom, useAtomValue } from "jotai";
+import selectedDayOfWeekAtom from "~/atoms/selectedDayOfWeek";
 
 const subjectToTWClass = new Map<SubjectCode, string>();
 subjectToTWClass.set('algebra', 'bg-blue-200')
@@ -35,8 +38,10 @@ const sunday = -1;
 
 export default function Schedule() {
     const nowDatetime = changeTimeZone(getNowTime())
-    const numericDayOfWeek = nowDatetime.getDay() - 1
+    const selectedDayOfWeek = useAtomValue(selectedDayOfWeekAtom)
+    const numericDayOfWeek = selectedDayOfWeek - 1
     const todaysSchedule = schedule[numericDayOfWeek]
+    const isSelectedDayToday = selectedDayOfWeek == changeTimeZone(getNowTime()).getDay()
 
     if (numericDayOfWeek == sunday) {
         return <section className="mt-6 flex flex-col gap-6">
@@ -73,8 +78,8 @@ export default function Schedule() {
                     lessonName={lesson.lessonName}
                     lessonCaption={`${lesson.start}-${lesson.end}`}
                     className={subjectToTWClass.get(lesson.code) ?? 'bg-gray-200'}
-                    gone={isCurrentLessonGone}
-                    needsAttention={isPreviousLessonGone || !isCurrentLessonGone}
+                    gone={isSelectedDayToday && isCurrentLessonGone}
+                    needsAttention={isSelectedDayToday && (isPreviousLessonGone || !isCurrentLessonGone)}
                 />
             </div>
             {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
@@ -84,8 +89,8 @@ export default function Schedule() {
                 <BreakCard
                     breakDuration={getMinutesBetweenTimestrings(nextBreak.start, nextBreak.end) + ' минут'}
                     breakCaption={`${nextBreak.start}-${nextBreak.end}`}
-                    gone={isCurrentBreakGone}
-                    needsAttention={isPreviousBreakGone || !isCurrentBreakGone}
+                    gone={isSelectedDayToday && isCurrentBreakGone}
+                    needsAttention={isSelectedDayToday && (isPreviousBreakGone || !isCurrentBreakGone)}
                 />
             </div>}
             </>
