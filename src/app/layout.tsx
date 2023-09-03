@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
 import Head from 'next/head'
+import Link from 'next/link'
 import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,13 +21,19 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <head>
+                <link rel="manifest" href="assets/manifest.json" />
+                <link rel="apple-touch-icon" href="assets/bober.png"></link>
+                <meta name="theme-color" content="#fff" />
                 <Script
                     defer
                     data-domain="xn--90aam8am.fun"
                     src="https://plausible.io/js/script.js"
                 />
             </head>
-            <body className={montserrat.className}>{children}</body>
+            <body className={montserrat.className}>
+                {children}
+                <Link href="https://www.flaticon.com/ru/free-icons/" title="бобр иконки" className="text-sm text-slate-300 absolute bottom-0">Бобр иконки от Freepik - Flaticon</Link>
+            </body>
         </html>
     )
 }
