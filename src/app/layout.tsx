@@ -19,7 +19,7 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <Head>
-                <script defer data-domain="бобер.fun" src="https://plausible.io/js/script.js"></script>
+                <script defer data-domain="xn--90aam8am.fun" src="https://plausible.io/js/script.js"></script>
             </Head>
             <body className={montserrat.className}>{children}</body>
         </html>
