@@ -75,7 +75,7 @@ export default function Schedule() {
             const lessonCompletionPercentage = getLessonCompletionPercentage(lesson, currentTime)
             const breakCompletionPercentage = nextBreak && getBreakCompletionPercentage(nextBreak, currentTime)
 
-            return <div key={lesson.code + 'block' + selectedDayOfWeek.toString() + index}>
+            return <React.Fragment key={lesson.code + 'block' + selectedDayOfWeek.toString() + index}>
                 <div className="flex items-center w-full" key={lesson.code}>
                     <ActiveScheduleItemIndicator
                         active={lesson.start < currentTime && lesson.end > currentTime}
@@ -100,7 +100,7 @@ export default function Schedule() {
                         progress={breakCompletionPercentage ?? 0}
                     />
                 </div>}
-            </div>
+            </React.Fragment>
         })}
     </section>
 }
