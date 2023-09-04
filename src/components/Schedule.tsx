@@ -75,32 +75,32 @@ export default function Schedule() {
             const lessonCompletionPercentage = getLessonCompletionPercentage(lesson, currentTime)
             const breakCompletionPercentage = nextBreak && getBreakCompletionPercentage(nextBreak, currentTime)
 
-            return <React.Fragment key={lesson.code + 'block'}> <div className="flex items-center w-full" key={lesson.code}>
-                <ActiveScheduleItemIndicator
-                    active={lesson.start < currentTime && lesson.end > currentTime}
-                />
-                <LessonCard
-                    lessonName={lesson.lessonName}
-                    lessonCaption={`${lesson.start}-${lesson.end}`}
-                    className={subjectToTWClass.get(lesson.code) ?? 'bg-gray-200'}
-                    gone={isSelectedDayToday && isCurrentLessonGone}
-                    needsAttention={isSelectedDayToday && (isPreviousLessonGone || !isCurrentLessonGone)}
-                    progress={lessonCompletionPercentage ?? 0}
-                />
+            return <div key={lesson.code + 'block' + selectedDayOfWeek.toString() + index}>
+                <div className="flex items-center w-full" key={lesson.code}>
+                    <ActiveScheduleItemIndicator
+                        active={lesson.start < currentTime && lesson.end > currentTime}
+                    />
+                    <LessonCard
+                        lessonName={lesson.lessonName}
+                        lessonCaption={`${lesson.start}-${lesson.end}`}
+                        className={subjectToTWClass.get(lesson.code) ?? 'bg-gray-200'}
+                        gone={isSelectedDayToday && isCurrentLessonGone}
+                        progress={lessonCompletionPercentage ?? 0}
+                    />
+                </div>
+                {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
+                    <ActiveScheduleItemIndicator
+                        active={nextBreak.start < currentTime && nextBreak.end > currentTime}
+                    />
+                    <BreakCard
+                        breakDuration={getMinutesBetweenTimestrings(nextBreak.start, nextBreak.end) + ' минут'}
+                        breakCaption={`${nextBreak.start}-${nextBreak.end}`}
+                        gone={isSelectedDayToday && isCurrentBreakGone}
+                        needsAttention={isSelectedDayToday && (isPreviousBreakGone || !isCurrentBreakGone)}
+                        progress={breakCompletionPercentage ?? 0}
+                    />
+                </div>}
             </div>
-            {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
-                <ActiveScheduleItemIndicator
-                    active={nextBreak.start < currentTime && nextBreak.end > currentTime}
-                />
-                <BreakCard
-                    breakDuration={getMinutesBetweenTimestrings(nextBreak.start, nextBreak.end) + ' минут'}
-                    breakCaption={`${nextBreak.start}-${nextBreak.end}`}
-                    gone={isSelectedDayToday && isCurrentBreakGone}
-                    needsAttention={isSelectedDayToday && (isPreviousBreakGone || !isCurrentBreakGone)}
-                    progress={breakCompletionPercentage ?? 0}
-                />
-            </div>}
-            </React.Fragment>
         })}
     </section>
 }
