@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface LessonCardProps {
     lessonName: string
@@ -27,12 +28,12 @@ function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention
     return (
         <div
             ref={ref}
-            className={`rounded-2xl w-full flex justify-center
-                        items-center p-6 text-center
-                        relative
-                        ${className}
-                        ${gone ? 'bg-slate-200 text-slate-500 border-none' : ''}`}>
-            <div className={`absolute h-full z-0 rounded-l-xl left-0 ${progressClassname ? progressClassname : 'bg-slate-600 opacity-10'}`} style={{ width: `${progress}%` }} />
+            className={twMerge(
+                'rounded-2xl w-full flex justify-center items-center p-6 text-center relative',
+                className,
+                gone ? 'bg-slate-200 text-slate-500 border-none' : ''
+            )}>
+            <div className={twMerge('absolute h-full z-0 rounded-l-xl left-0 bg-slate-600 opacity-10', progressClassname)} style={{ width: `${progress}%` }} />
             <div className="relative">
                 <h3 className="font-bold text-xl mb-1">{lessonName}</h3>
                 <p className="text-base opacity-50">{lessonCaption}</p>
