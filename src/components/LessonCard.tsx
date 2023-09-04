@@ -32,7 +32,7 @@ function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention
                         relative
                         ${className}
                         ${gone ? 'bg-slate-200 text-slate-500 border-none' : ''}`}>
-            <div className={`absolute h-full z-0 bg-slate-600 rounded-l-2xl opacity-10 left-0 ${progressClassname}`} style={{ width: `${progress}%` }} />
+            <div className={`absolute h-full z-0 rounded-l-xl left-0 ${progressClassname ? progressClassname : 'bg-slate-600 opacity-10'}`} style={{ width: `${progress}%` }} />
             <div className="relative">
                 <h3 className="font-bold text-xl mb-1">{lessonName}</h3>
                 <p className="text-base opacity-50">{lessonCaption}</p>

@@ -29,7 +29,7 @@ subjectToTWClass.set('social-studies', 'bg-pink-200')
 subjectToTWClass.set('physical-education', 'bg-gray-200')
 subjectToTWClass.set('economics', 'bg-green-200')
 subjectToTWClass.set('law', 'bg-red-200')
-subjectToTWClass.set('conversation-about-important', 'bg-yellow-600')
+subjectToTWClass.set('conversation-about-important', 'bg-yellow-200')
 subjectToTWClass.set('mhc', 'bg-gray-200')
 subjectToTWClass.set('obzh', 'bg-gray-200')
 subjectToTWClass.set('russian-2', 'bg-red-200')
@@ -78,26 +78,26 @@ export default function Schedule() {
             return <React.Fragment key={lesson.code + 'block' + selectedDayOfWeek.toString() + index}>
                 <div className="flex items-center w-full" key={lesson.code}>
                     <ActiveScheduleItemIndicator
-                        active={lesson.start < currentTime && lesson.end > currentTime}
+                        active={isSelectedDayToday && (lesson.start < currentTime && lesson.end > currentTime)}
                     />
                     <LessonCard
                         lessonName={lesson.lessonName}
                         lessonCaption={`${lesson.start}-${lesson.end}`}
                         className={subjectToTWClass.get(lesson.code) ?? 'bg-gray-200'}
                         gone={isSelectedDayToday && isCurrentLessonGone}
-                        progress={lessonCompletionPercentage ?? 0}
+                        progress={isSelectedDayToday ? lessonCompletionPercentage ?? 0 : 0}
                     />
                 </div>
                 {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
                     <ActiveScheduleItemIndicator
-                        active={nextBreak.start < currentTime && nextBreak.end > currentTime}
+                        active={isSelectedDayToday && nextBreak.start < currentTime && nextBreak.end > currentTime}
                     />
                     <BreakCard
                         breakDuration={getMinutesBetweenTimestrings(nextBreak.start, nextBreak.end) + ' минут'}
                         breakCaption={`${nextBreak.start}-${nextBreak.end}`}
                         gone={isSelectedDayToday && isCurrentBreakGone}
-                        needsAttention={isSelectedDayToday && (isPreviousBreakGone || !isCurrentBreakGone)}
-                        progress={breakCompletionPercentage ?? 0}
+                        // needsAttention={isSelectedDayToday && (isPreviousBreakGone || !isCurrentBreakGone)}
+                        progress={isSelectedDayToday ? breakCompletionPercentage ?? 0 : 0}
                     />
                 </div>}
             </React.Fragment>

@@ -185,7 +185,7 @@ const lessonNamesObj = {
     'russian-2': 'Русский язык (Внеурочка к ЕГЭ) 📚',
     'literature': 'Литература 📚',
     'algebra': 'Алгебра 📈',
-    'mathematics': 'Математика(Внеурочка для профиля)📈',
+    'mathematics': 'Математика (проф.)📈',
     'geometry': 'Геометрия 📐',
     'physics': 'Физика ⚛️',
     'astronomy': 'Астрономия',
@@ -255,8 +255,8 @@ export const schedule: SchoolDay[] = [
         dayOfTheWeek: 2,
         lessons: [
             {
-                code: 'russian',
-                lessonName: lessonNames.get('russian')!,
+                code: 'literature',
+                lessonName: lessonNames.get('literature')!,
                 start: tradionalLessonsStartsAndEnds[0].start,
                 end: tradionalLessonsStartsAndEnds[0].end
             },

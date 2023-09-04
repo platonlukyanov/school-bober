@@ -5,13 +5,13 @@ interface BreakCardProps extends Omit<React.ComponentProps<typeof LessonCard>, '
     breakCaption: string
 }
 
-function BreakCard(props: BreakCardProps) {
+function BreakCard({ progressClassname, breakDuration, breakCaption, ...rest }: BreakCardProps) {
     return <LessonCard
-        lessonName={props.breakDuration}
-        lessonCaption={props.breakCaption}
+        lessonName={breakDuration}
+        lessonCaption={breakCaption}
         className="border-green-400 border-2 text-green-400"
-        progressClassname="bg-green-400 opacity-50"
-        {...props}
+        progressClassname={`bg-green-400 opacity-20 ${progressClassname}`}
+        {...rest}
     />
 }
 
