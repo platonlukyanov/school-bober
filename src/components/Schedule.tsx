@@ -12,6 +12,7 @@ import selectedDayOfWeekAtom, { currentDatetimeAtom } from "~/atoms/selectedDayO
 import getLessonCompletionPercentage from "~/utils/getLessonCompletionPercentage";
 import getBreakCompletionPercentage from "~/utils/getBreakCompletionPercentage";
 import React from "react";
+import isTimeBetweenTimes from "~/utils/isTimeBetweenTimes";
 
 const subjectToTWClass = new Map<SubjectCode, string>();
 subjectToTWClass.set('algebra', 'bg-blue-200')
@@ -74,11 +75,13 @@ export default function Schedule() {
             
             const lessonCompletionPercentage = getLessonCompletionPercentage(lesson, currentTime)
             const breakCompletionPercentage = nextBreak && getBreakCompletionPercentage(nextBreak, currentTime)
+            const isLessonActive = isSelectedDayToday && isTimeBetweenTimes(currentTime, lesson.start, lesson.end)
+            const isBreakActive = Boolean(isSelectedDayToday && nextBreak && isTimeBetweenTimes(currentTime, nextBreak.start, nextBreak.end))
 
             return <React.Fragment key={lesson.code + 'block' + selectedDayOfWeek.toString() + index}>
                 <div className="flex items-center w-full" key={lesson.code}>
                     <ActiveScheduleItemIndicator
-                        active={isSelectedDayToday && (lesson.start < currentTime && lesson.end > currentTime)}
+                        active={isLessonActive}
                     />
                     <LessonCard
                         lessonName={lesson.lessonName}
@@ -90,7 +93,7 @@ export default function Schedule() {
                 </div>
                 {nextBreak && <div className="flex items-center" key={lesson.code + '_break'}>
                     <ActiveScheduleItemIndicator
-                        active={isSelectedDayToday && nextBreak.start < currentTime && nextBreak.end > currentTime}
+                        active={isBreakActive}
                     />
                     <BreakCard
                         breakDuration={getMinutesBetweenTimestrings(nextBreak.start, nextBreak.end) + ' минут'}
