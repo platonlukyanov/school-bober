@@ -405,8 +405,8 @@ export const schedule: SchoolDay[] = [
                 end: tradionalLessonsStartsAndEnds[1].end
             },
             {
-                code: 'literature',
-                lessonName: lessonNames.get('literature')!,
+                code: 'russian',
+                lessonName: lessonNames.get('russian')!,
                 start: tradionalLessonsStartsAndEnds[2].start,
                 end: tradionalLessonsStartsAndEnds[2].end
             },
