@@ -1,3 +1,4 @@
+import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import Schedule from '~/components/Schedule'
@@ -10,6 +11,7 @@ export default function Home() {
             <div className="w-full max-w-md">
                 <nav className="flex justify-between">
                     <SelectDayOfWeek />
+                    <UserButton afterSignOutUrl="/"/>
                     <Image src="/bober.svg" alt="B" width={35} height={35}/>
                 </nav>
                 <Schedule />
