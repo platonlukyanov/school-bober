@@ -33,7 +33,7 @@ function LessonCard({ lessonName, lessonCaption, gone, className, needsAttention
                 className,
                 gone ? 'bg-slate-200 text-slate-500 border-none' : ''
             )}>
-            <div className={twMerge('absolute h-full z-0 rounded-l-xl left-0 bg-slate-600 opacity-10', progressClassname)} style={{ width: `${progress}%` }} />
+            <div className={twMerge('absolute h-full z-0 rounded-l-2xl left-0 bg-slate-600 opacity-10', progressClassname)} style={{ width: `${progress}%` }} />
             <div className="relative">
                 <h3 className="font-bold text-xl mb-1">{lessonName}</h3>
                 <p className="text-base opacity-50">{lessonCaption}</p>
