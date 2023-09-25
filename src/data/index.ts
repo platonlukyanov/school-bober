@@ -80,10 +80,10 @@ const tradionalBreaksStartsAndEnds: ScheduleItem[] = [
     },
     {
         start: "12:20",
-        end: "12:35",
+        end: "12:30",
     },
     {
-        start: "13:20",
+        start: "13:15",
         end: "13:35",
     },
     {
@@ -110,8 +110,8 @@ const tradionalLessonsStartsAndEnds: ScheduleItem[] = [
         end: "12:20",
     },
     {
-        start: "12:35",
-        end: "13:20",
+        start: "12:30",
+        end: "13:15",
     },
     {
         start: "13:35",
@@ -126,24 +126,24 @@ const tradionalLessonsStartsAndEnds: ScheduleItem[] = [
 const saturdayBreaksStartsAndEnds: ScheduleItem[] = [
     {
         start: "9:15",
-        end: "9:25",
+        end: "9:25"
     },
     {
         start: "10:10",
-        end: "10:30",
+        end: "10:20"
     },
     {
-        start: "11:15",
-        end: "11:35",
+        start: "11:05",
+        end: "11:15"
     },
     {
-        start: "12:20",
-        end: "12:30",
+        start: "12:00",
+        end: "12:10"
     },
     {
-        start: "13:15",
-        end: "13:25",
-    },
+        start: "12:55",
+        end: "13:05"
+    }
 ]
 
 const saturdayLessonsStartsAndEnds: ScheduleItem[] = [
@@ -153,24 +153,24 @@ const saturdayLessonsStartsAndEnds: ScheduleItem[] = [
     },
     {
         start: "9:25",
-        end: "10:10",
+        end: "10:10"
     },
     {
-        start: "10:30",
-        end: "11:15",
+        start: "10:20",
+        end: "11:05"
     },
     {
-        start: "11:35",
-        end: "12:20",
+        start: "11:15",
+        end: "12:00"
     },
     {
-        start: "12:30",
-        end: "13:15",
+        start: "12:10",
+        end: "12:55"
     },
     {
-        start: "13:25",
-        end: "14:10",
-    },
+        start: "13:05",
+        end: "13:50"
+    }
 ]
 
 const lessonNamesObj = {
@@ -237,7 +237,7 @@ export const schedule: SchoolDay[] = [
                 end: tradionalLessonsStartsAndEnds[4].end
             },
             {
-                code: 'law',
+                code: 'social-studies',
                 lessonName: lessonNames.get('law')!,
                 start: tradionalLessonsStartsAndEnds[5].start,
                 end: tradionalLessonsStartsAndEnds[5].end
