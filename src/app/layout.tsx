@@ -6,6 +6,9 @@ import Script from 'next/script'
 import JotaiProvider from '~/providers/jotai'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ruRU } from '@clerk/localizations'
+import ReactQueryProviders from '~/providers/react-query'
+import { Toaster } from 'react-hot-toast'
+import "@uploadthing/react/styles.css";
 
 const inter = Inter({ subsets: ['latin'] })
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -40,7 +43,10 @@ export default function RootLayout({
                 </head>
                 <body className={montserrat.className}>
                     <JotaiProvider>
-                        {children}
+                        <ReactQueryProviders>
+                            {children}
+                            <Toaster />
+                        </ReactQueryProviders>
                     </JotaiProvider>
                 </body>
             </html>

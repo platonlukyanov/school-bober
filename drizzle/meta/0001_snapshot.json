@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "14d5c0d8-13bf-43b2-ab3b-efdc20aa0a96",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "a77ad365-b136-4c66-b6b0-e860b184aff4",
+  "prevId": "14d5c0d8-13bf-43b2-ab3b-efdc20aa0a96",
   "tables": {
     "homeworks": {
       "name": "homeworks",
@@ -50,6 +50,12 @@
         },
         "code": {
           "name": "code",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false

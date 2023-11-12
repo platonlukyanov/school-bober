@@ -26,6 +26,10 @@
   "exclude": ["node_modules"],
   "ts-node": {
     "esm": true,
-    "experimentalSpecifierResolution": "node"
+    "experimentalSpecifierResolution": "node",
+    "moduleTypes": {
+      "lib/cache.ts": "esm"
+    }
   }
+  
 }

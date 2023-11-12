@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS "homeworks" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"subject_id" text NOT NULL,
+	"subject_id" integer NOT NULL,
 	"date" date NOT NULL,
 	"content" text NOT NULL
 );

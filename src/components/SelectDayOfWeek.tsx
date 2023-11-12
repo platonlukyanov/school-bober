@@ -1,7 +1,7 @@
 'use client'
 import { Suspense } from "react";
 import toCapitalized from "~/utils/toCapitalized";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { SkeletonSelect, SkeletonSelectContent, SkeletonSelectItem, SkeletonSelectTrigger, SkeletonSelectValue } from "./ui/skeleton-select";
 import { useAtom } from "jotai";
 import russianDaysOfTheWeek, { russianDaysToEnglishDayNumbers } from "~/data/russianDaysOfWeek";
 import selectedDayOfWeekAtom from "~/atoms/selectedDayOfWeek";
@@ -13,16 +13,16 @@ export default function SelectDayOfWeek() {
         setSelectedDayOfWeek(Number(newValue))
     }
 
-    return <Select value={selectedDayOfWeek.toString()} onValueChange={handleNewDayOfWeekSelected}>
-        <SelectTrigger className="text-2xl font-bold -ml-3 focus:ring-0 focus:shadow-none">
-            <SelectValue placeholder="День..." />
-        </SelectTrigger>
-        <SelectContent >
+    return <SkeletonSelect value={selectedDayOfWeek.toString()} onValueChange={handleNewDayOfWeekSelected}>
+        <SkeletonSelectTrigger className="text-2xl font-bold -ml-3 focus:ring-0 focus:shadow-none">
+            <SkeletonSelectValue placeholder="День..." />
+        </SkeletonSelectTrigger>
+        <SkeletonSelectContent >
             {russianDaysOfTheWeek.map((day, index) => (
-                <SelectItem key={index} value={russianDaysToEnglishDayNumbers[day].toString()}>
+                <SkeletonSelectItem key={index} value={russianDaysToEnglishDayNumbers[day].toString()}>
                     {toCapitalized(day)}
-                </SelectItem>
+                </SkeletonSelectItem>
             ))}
-        </SelectContent>
-    </Select>
+        </SkeletonSelectContent>
+    </SkeletonSelect>
 }

@@ -173,7 +173,7 @@ const saturdayLessonsStartsAndEnds: ScheduleItem[] = [
     }
 ]
 
-const lessonNamesObj = {
+export const subjectsDict = {
     'conversation-about-important': 'Разговор о важном 🪖',
     'physical-education':'Физкультура ⛹️‍♀️',
     'history': 'История ⌛️',
@@ -198,9 +198,9 @@ const lessonNamesObj = {
     'obzh': 'ОБЖ 🦺',
 }
 
-const lessonNames = new Map(Object.entries(lessonNamesObj))
+const lessonNames = new Map(Object.entries(subjectsDict))
 
-export type SubjectCode = keyof typeof lessonNamesObj;
+export type SubjectCode = keyof typeof subjectsDict;
 
 export const schedule: SchoolDay[] = [
     {
