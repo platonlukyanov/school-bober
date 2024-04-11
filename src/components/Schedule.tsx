@@ -16,7 +16,7 @@ import isTimeBetweenTimes from "~/utils/isTimeBetweenTimes";
 
 const subjectToTWClass = new Map<SubjectCode, string>();
 subjectToTWClass.set('algebra', 'bg-blue-200')
-subjectToTWClass.set('geometry', 'bg-green-200')
+subjectToTWClass.set('geometry', 'bg-blue-200')
 subjectToTWClass.set('russian', 'bg-red-200')
 subjectToTWClass.set('literature', 'bg-yellow-200')
 subjectToTWClass.set('english', 'bg-purple-200')
